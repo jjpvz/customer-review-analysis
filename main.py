@@ -2,9 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 from collections import Counter
 
-# Wat zijn de demografische gegevens van de reviewers?
-# Hoeveel reviewers raden het product aan?
-# Wat zijn de meest voorkomende kenmerken van het product?
+# TODO:
+# 1. gemiddelde leeftijd van reviewers -- done
+# 2. welke leeftijdsgroep geeft de hoogste rating
+# 3. welke stad komt het meest voor
+# 4. hoeveel reviewers raden het product aan?
+# 5. wat zijn de meest voorkomende kenmerken van het product?
 
 def generateSoup():
     url = 'https://www.bol.com/nl/nl/p/de-jongen-de-mol-de-vos-en-het-paard/9200000128095686/?promo=main_803_POPC_B3_product_0_&bltgh=m0R10Q-aPf-OK5J1ISlMyw.49_gYnngoQ1VrqwYEo3071Khg_0_1_2.3.ProductImage#product-reviews'
@@ -21,10 +24,12 @@ def getNumOfReviews():
     review_string_list = getListOfString(generateSoup())[1].split(' ')
     reviews = review_string_list[0].removeprefix('(')
     print(reviews)
+# getNumOfReviews()
 
 def getRating():
     rating = getListOfString(generateSoup())[0].removesuffix('/5')
     print(rating)
+# getRating()
 
 # Returns list with demographic info of every reviewer 
 def getDemographics(soup):
@@ -67,8 +72,6 @@ def getCities():
     print(cities)
 # getCities()
 
-getNumOfReviews()
-getRating()
 # Prints average age of all reviewers by dividing sum of all values in list by sum of all products of key multiplied by value
 def getAverageAge():
     list = dict(Counter(generateAge()))
