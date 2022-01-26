@@ -5,7 +5,7 @@ from collections import Counter
 # TODO:
 # 1. gemiddelde leeftijd van reviewers -- done
 # 2. welke leeftijdsgroep geeft de hoogste rating
-# 3. welke stad komt het meest voor
+# 3. welke stad komt het meest voor -- done
 # 4. hoeveel reviewers raden het product aan?
 # 5. wat zijn de meest voorkomende kenmerken van het product?
 
@@ -69,17 +69,23 @@ def getCities():
         if city_string[0].isalpha():
             city = city_string.split(' ')[0]
             cities.append(city)      
-    print(cities)
-# getCities()
+    # print(cities)
+    return cities
+
+def getMostCommonCity():
+    dictionary = dict(Counter(getCities()))
+    max_key = max(dictionary, key = dictionary.get)
+    print(max_key)
+getMostCommonCity()
 
 # Prints average age of all reviewers by dividing sum of all values in list by sum of all products of key multiplied by value
 def getAverageAge():
-    list = dict(Counter(generateAge()))
+    d = dict(Counter(generateAge()))
     reviewers = []
     x = []
-    for key in list:
-        reviewers.append(list[key])
-        average_age_of_group = key * list[key]
+    for key in d:
+        reviewers.append(d[key])
+        average_age_of_group = key * d[key]
         x.append(average_age_of_group)
     average_age = sum(x) // sum(reviewers)
     print(average_age)
