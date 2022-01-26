@@ -9,3 +9,15 @@ def generateSoup():
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
 
+def getListOfString(soup):
+    div = soup.find('div', {'class':'u-pl--xxs'})
+    string_list = div.get_text().split(' ', 1)
+    return string_list
+
+def getNumOfReviews():
+    review_string_list = getListOfString(generateSoup())[1].split(' ')
+    #review_string_list = string_list[1].split(' ')
+    reviews = review_string_list[0].removeprefix('(')
+    print(reviews)
+
+getNumOfReviews()
