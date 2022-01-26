@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 # Wat zijn de meest voorkomende kenmerken van het product?
 
 def generateSoup():
-    url = 'https://www.bol.com/nl/nl/p/de-jongen-de-mol-de-vos-en-het-paard/9200000128095686/?promo=main_803_POPC_B3_product_0_&bltgh=m0R10Q-aPf-OK5J1ISlMyw.49_gYnngoQ1VrqwYEo3071Khg_0_1_2.3.ProductImage'
+    url = 'https://www.bol.com/nl/nl/p/de-jongen-de-mol-de-vos-en-het-paard/9200000128095686/?promo=main_803_POPC_B3_product_0_&bltgh=m0R10Q-aPf-OK5J1ISlMyw.49_gYnngoQ1VrqwYEo3071Khg_0_1_2.3.ProductImage#product-reviews'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     return soup
@@ -35,15 +35,15 @@ def getDemographics(soup):
         all_demos.append(demos)
     return all_demos
 
-# Prints list with the age of every reviewer 
-def getAllAges():
+# Prints list with age of every reviewer 
+def getAges():
     ages = []
     for list in getDemographics(generateSoup()):
         age = list[1]
         ages.append(age)
     print(ages)
 
-# prints list with city of every reviewer
+# Prints list with city of every reviewer
 def getCities():
     cities = []
     for list in getDemographics(generateSoup()):
@@ -55,5 +55,5 @@ def getCities():
 
 getNumOfReviews()
 getRating()
-getAllAges()
+getAges()
 getCities()
