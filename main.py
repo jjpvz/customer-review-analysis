@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from collections import Counter
 
 # Wat zijn de demografische gegevens van de reviewers?
 # Hoeveel reviewers raden het product aan?
@@ -35,13 +36,25 @@ def getDemographics(soup):
         all_demos.append(demos)
     return all_demos
 
-# Prints list with age of every reviewer 
-def getAges():
+# Returns list with age group of every reviewer 
+def getAgeGroups():
     ages = []
     for list in getDemographics(generateSoup()):
         age = list[1]
-        ages.append(age)
-    print(ages)
+        ages.append(age.get_text())
+    # print(ages) 
+    return ages
+# getAgeGroups()
+
+# Prints list with age group of every reviewer 
+def generateAge():
+    average_ages = []
+    for age_group in getAgeGroups():
+        average_age = age_group[0:2]
+        average_ages.append(int(average_age) + 5)
+    # print(average_ages)     
+    return average_ages
+# generateAge()
 
 # Prints list with city of every reviewer
 def getCities():
@@ -50,10 +63,21 @@ def getCities():
         city_string = list[2].get_text().lower()
         if city_string[0].isalpha():
             city = city_string.split(' ')[0]
-            cities.append(city.lower())
+            cities.append(city)      
     print(cities)
+# getCities()
 
 getNumOfReviews()
 getRating()
-getAges()
-getCities()
+# Prints average age of all reviewers by dividing sum of all values in list by sum of all products of key multiplied by value
+def getAverageAge():
+    list = dict(Counter(generateAge()))
+    reviewers = []
+    x = []
+    for key in list:
+        reviewers.append(list[key])
+        average_age_of_group = key * list[key]
+        x.append(average_age_of_group)
+    average_age = sum(x) // sum(reviewers)
+    print(average_age)
+# getAverageAge()
