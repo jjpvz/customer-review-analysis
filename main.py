@@ -20,4 +20,10 @@ def getNumOfReviews():
     reviews = review_string_list[0].removeprefix('(')
     print(reviews)
 
+def getRating():
+    rating = getListOfString(generateSoup())[0].removesuffix('/5')
+    print(rating)
+
 getNumOfReviews()
+getRating()
+
