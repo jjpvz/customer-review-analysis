@@ -25,5 +25,24 @@ def getRating():
     rating = getListOfString(generateSoup())[0].removesuffix('/5')
     print(rating)
 
+# Returns list with demographic info of every reviewer 
+def getDemographics(soup):
+    list_of_ul = soup.find_all('ul', {'class': 'review-metadata__list'})
+    all_demos = []
+    for ul in list_of_ul:
+        list_of_li = list(ul.descendants)
+        demos = list_of_li[2::3]
+        all_demos.append(demos)
+    return all_demos
+
+# Prints list with the age of every reviewer 
+def getAllAges():
+    ages = []
+    for list in getDemographics(generateSoup()):
+        age = list[1]
+        ages.append(age)
+    print(ages)
+
 getNumOfReviews()
 getRating()
+getAllAges()
