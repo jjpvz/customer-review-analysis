@@ -27,3 +27,6 @@ def getRating():
 getNumOfReviews()
 getRating()
 
+# Wat zijn de demografische gegevens van de reviewers?
+# Hoeveel reviewers raden het product aan?
+# Wat zijn de meest voorkomende kenmerken van het product?
