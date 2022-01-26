@@ -43,6 +43,17 @@ def getAllAges():
         ages.append(age)
     print(ages)
 
+# prints list with city of every reviewer
+def getCities():
+    cities = []
+    for list in getDemographics(generateSoup()):
+        city_string = list[2].get_text().lower()
+        if city_string[0].isalpha():
+            city = city_string.split(' ')[0]
+            cities.append(city.lower())
+    print(cities)
+
 getNumOfReviews()
 getRating()
 getAllAges()
+getCities()
